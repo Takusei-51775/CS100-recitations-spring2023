@@ -1,0 +1,2123 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CS100 Recitation 9</title>
+        <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension marp-team.marp-vscode */
+#__marp-vscode {
+  all: initial;
+}
+
+/* Override VS Code default CSS rules reverting to initial
+   https://github.com/microsoft/vscode/blob/master/src/vs/workbench/contrib/webview/browser/pre/main.js#L53 */
+body.marp-vscode {
+  padding: 0;
+}
+
+body.marp-vscode img {
+  max-width: unset;
+  max-height: unset;
+}
+
+body.marp-vscode a,
+body.marp-vscode a:hover,
+body.marp-vscode code {
+  color: unset;
+}
+
+body.marp-vscode blockquote {
+  background: unset;
+  border-color: unset;
+}
+
+@media screen {
+  body.marp-vscode {
+    overflow-y: scroll;
+  }
+
+  #__marp-vscode [data-marp-vscode-slide-wrapper] {
+    margin: 20px;
+  }
+
+  #__marp-vscode svg[data-marpit-svg] {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 25%);
+    display: block;
+    margin: 0;
+  }
+
+  /* Based on https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+  #code-csp-warning {
+    background-color: #444;
+    box-shadow: 1px 1px 1px rgb(0 0 0 / 25%);
+    color: white;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 22px;
+    margin: 16px;
+    padding: 6px;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    word-wrap: break-word;
+  }
+
+  #code-csp-warning:hover {
+    text-decoration: none;
+    background-color: #007acc;
+    box-shadow: 2px 2px 2px rgb(0 0 0 / 25%);
+  }
+}
+
+@media print {
+  body.marp-vscode #code-csp-warning {
+    display: none;
+  }
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <style id="__marp-vscode-style">div#__marp-vscode > div > svg > foreignObject > section {
+  width: 1280px;
+  height: 720px;
+
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+
+  scroll-snap-align: center center;
+}div#__marp-vscode > div > svg > foreignObject > section::after {
+  bottom: 0;
+  content: attr(data-marpit-pagination);
+  padding: inherit;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}div#__marp-vscode > div > svg > foreignObject > section:not([data-marpit-pagination])::after {
+  display: none;
+}/* Normalization */div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1) {
+  font-size: 2em;
+  margin: 0.67em 0;
+}div#__marp-vscode > div > svg > foreignObject > section video::-webkit-media-controls {
+  will-change: transform;
+}@page {
+  size: 1280px 720px;
+  margin: 0;
+}@media print {html, body {
+  background-color: #fff;
+  margin: 0;
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+  div#__marp-vscode > div > svg > foreignObject > section {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  div#__marp-vscode > div > svg > foreignObject > section, div#__marp-vscode > div > svg > foreignObject > section * {
+    -webkit-print-color-adjust: exact !important;
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    color-adjust: exact !important;
+    transition: none !important;
+  }
+
+  div#__marp-vscode > div > svg[data-marpit-svg] {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+  }
+}
+div#__marp-vscode > div > svg > foreignObject > section img[data-marp-twemoji]{
+  background:transparent;
+  height:1em;
+  margin:0 .05em 0 .1em;
+  vertical-align:-.1em;
+  width:1em;
+}
+/*!
+ * Marp default theme.
+ *
+ * @theme default
+ * @author Yuki Hattori
+ *
+ * @auto-scaling true
+ * @size 16:9 1280px 720px
+ * @size 4:3 960px 720px
+ */
+div#__marp-vscode > div > svg > foreignObject > section{
+    --color-prettylights-syntax-comment:#6e7781;
+    --color-prettylights-syntax-constant:#0550ae;
+    --color-prettylights-syntax-entity:#8250df;
+    --color-prettylights-syntax-storage-modifier-import:#24292f;
+    --color-prettylights-syntax-entity-tag:#116329;
+    --color-prettylights-syntax-keyword:#cf222e;
+    --color-prettylights-syntax-string:#0a3069;
+    --color-prettylights-syntax-variable:#953800;
+    --color-prettylights-syntax-brackethighlighter-unmatched:#82071e;
+    --color-prettylights-syntax-invalid-illegal-text:#f6f8fa;
+    --color-prettylights-syntax-invalid-illegal-bg:#82071e;
+    --color-prettylights-syntax-carriage-return-text:#f6f8fa;
+    --color-prettylights-syntax-carriage-return-bg:#cf222e;
+    --color-prettylights-syntax-string-regexp:#116329;
+    --color-prettylights-syntax-markup-list:#3b2300;
+    --color-prettylights-syntax-markup-heading:#0550ae;
+    --color-prettylights-syntax-markup-italic:#24292f;
+    --color-prettylights-syntax-markup-bold:#24292f;
+    --color-prettylights-syntax-markup-deleted-text:#82071e;
+    --color-prettylights-syntax-markup-deleted-bg:#ffebe9;
+    --color-prettylights-syntax-markup-inserted-text:#116329;
+    --color-prettylights-syntax-markup-inserted-bg:#dafbe1;
+    --color-prettylights-syntax-markup-changed-text:#953800;
+    --color-prettylights-syntax-markup-changed-bg:#ffd8b5;
+    --color-prettylights-syntax-markup-ignored-text:#eaeef2;
+    --color-prettylights-syntax-markup-ignored-bg:#0550ae;
+    --color-prettylights-syntax-meta-diff-range:#8250df;
+    --color-prettylights-syntax-brackethighlighter-angle:#57606a;
+    --color-prettylights-syntax-sublimelinter-gutter-mark:#8c959f;
+    --color-prettylights-syntax-constant-other-reference-link:#0a3069;
+    --color-fg-default:#24292f;
+    --color-fg-muted:#57606a;
+    --color-fg-subtle:#6e7781;
+    --color-canvas-default:#fff;
+    --color-canvas-subtle:#f6f8fa;
+    --color-border-default:#d0d7de;
+    --color-border-muted:#d8dee4;
+    --color-neutral-muted:rgba(175,184,193,.2);
+    --color-accent-fg:#0969da;
+    --color-accent-emphasis:#0969da;
+    --color-attention-subtle:#fff8c5;
+    --color-danger-fg:#cf222e;
+    color-scheme:light;
+  }
+div#__marp-vscode > div > svg > foreignObject > section:where(.invert){
+    --color-prettylights-syntax-comment:#8b949e;
+    --color-prettylights-syntax-constant:#79c0ff;
+    --color-prettylights-syntax-entity:#d2a8ff;
+    --color-prettylights-syntax-storage-modifier-import:#c9d1d9;
+    --color-prettylights-syntax-entity-tag:#7ee787;
+    --color-prettylights-syntax-keyword:#ff7b72;
+    --color-prettylights-syntax-string:#a5d6ff;
+    --color-prettylights-syntax-variable:#ffa657;
+    --color-prettylights-syntax-brackethighlighter-unmatched:#f85149;
+    --color-prettylights-syntax-invalid-illegal-text:#f0f6fc;
+    --color-prettylights-syntax-invalid-illegal-bg:#8e1519;
+    --color-prettylights-syntax-carriage-return-text:#f0f6fc;
+    --color-prettylights-syntax-carriage-return-bg:#b62324;
+    --color-prettylights-syntax-string-regexp:#7ee787;
+    --color-prettylights-syntax-markup-list:#f2cc60;
+    --color-prettylights-syntax-markup-heading:#1f6feb;
+    --color-prettylights-syntax-markup-italic:#c9d1d9;
+    --color-prettylights-syntax-markup-bold:#c9d1d9;
+    --color-prettylights-syntax-markup-deleted-text:#ffdcd7;
+    --color-prettylights-syntax-markup-deleted-bg:#67060c;
+    --color-prettylights-syntax-markup-inserted-text:#aff5b4;
+    --color-prettylights-syntax-markup-inserted-bg:#033a16;
+    --color-prettylights-syntax-markup-changed-text:#ffdfb6;
+    --color-prettylights-syntax-markup-changed-bg:#5a1e02;
+    --color-prettylights-syntax-markup-ignored-text:#c9d1d9;
+    --color-prettylights-syntax-markup-ignored-bg:#1158c7;
+    --color-prettylights-syntax-meta-diff-range:#d2a8ff;
+    --color-prettylights-syntax-brackethighlighter-angle:#8b949e;
+    --color-prettylights-syntax-sublimelinter-gutter-mark:#484f58;
+    --color-prettylights-syntax-constant-other-reference-link:#a5d6ff;
+    --color-fg-default:#c9d1d9;
+    --color-fg-muted:#8b949e;
+    --color-fg-subtle:#6e7681;
+    --color-canvas-default:#0d1117;
+    --color-canvas-subtle:#161b22;
+    --color-border-default:#30363d;
+    --color-border-muted:#21262d;
+    --color-neutral-muted:hsla(215,8%,47%,.4);
+    --color-accent-fg:#58a6ff;
+    --color-accent-emphasis:#1f6feb;
+    --color-attention-subtle:rgba(187,128,9,.15);
+    --color-danger-fg:#f85149;
+    color-scheme:dark;
+  }
+div#__marp-vscode > div > svg > foreignObject > section{
+  -ms-text-size-adjust:100%;
+  -webkit-text-size-adjust:100%;
+  word-wrap:break-word;
+  background-color:var(--color-canvas-default);
+  color:var(--color-fg-default);
+  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  font-size:16px;
+  line-height:1.5;
+  margin:0;
+}
+div#__marp-vscode > div > svg > foreignObject > section {
+  --marpit-root-font-size:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1):hover .anchor .octicon-link:before,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2):hover .anchor .octicon-link:before,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3):hover .anchor .octicon-link:before,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4):hover .anchor .octicon-link:before,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5):hover .anchor .octicon-link:before,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6):hover .anchor .octicon-link:before{
+  background-color:currentColor;
+  content:" ";
+  display:inline-block;
+  height:16px;
+  -webkit-mask-image:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0z"/></svg>');
+  mask-image:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0z"/></svg>');
+  width:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section details,div#__marp-vscode > div > svg > foreignObject > section figcaption,div#__marp-vscode > div > svg > foreignObject > section figure{
+  display:block;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section summary{
+  display:list-item;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [hidden]{
+  display:none !important;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section a{
+  background-color:transparent;
+  color:var(--color-accent-fg);
+  text-decoration:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section abbr[title]{
+  border-bottom:none;
+  -webkit-text-decoration:underline dotted;
+          text-decoration:underline dotted;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section b,div#__marp-vscode > div > svg > foreignObject > section strong{
+  font-weight:var(--base-text-weight-semibold, 600);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section dfn{
+  font-style:italic;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1){
+  border-bottom:1px solid var(--color-border-muted);
+  font-size:2em;
+  font-weight:var(--base-text-weight-semibold, 600);
+  margin:.67em 0;
+  padding-bottom:.3em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section mark{
+  background-color:var(--color-attention-subtle);
+  color:var(--color-fg-default);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section small{
+  font-size:90%;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section sub,div#__marp-vscode > div > svg > foreignObject > section sup{
+  font-size:75%;
+  line-height:0;
+  position:relative;
+  vertical-align:baseline;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section sub{
+  bottom:-.25em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section sup{
+  top:-.5em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section img{
+  background-color:var(--color-canvas-default);
+  border-style:none;
+  box-sizing:content-box;
+  max-width:100%;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section code,div#__marp-vscode > div > svg > foreignObject > section kbd,div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre),div#__marp-vscode > div > svg > foreignObject > section samp{
+  font-family:monospace;
+  font-size:1em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section figure{
+  margin:1em 40px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section hr{
+  background:transparent;
+  background-color:var(--color-border-default);
+  border:0;
+  box-sizing:content-box;
+  height:.25em;
+  margin:24px 0;
+  overflow:hidden;
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section input{
+  font:inherit;
+  font-family:inherit;
+  font-size:inherit;
+  line-height:inherit;
+  margin:0;
+  overflow:visible;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [type=button],div#__marp-vscode > div > svg > foreignObject > section [type=reset],div#__marp-vscode > div > svg > foreignObject > section [type=submit]{
+  -webkit-appearance:button;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [type=checkbox],div#__marp-vscode > div > svg > foreignObject > section [type=radio]{
+  box-sizing:border-box;
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [type=number]::-webkit-inner-spin-button,div#__marp-vscode > div > svg > foreignObject > section [type=number]::-webkit-outer-spin-button{
+  height:auto;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [type=search]::-webkit-search-cancel-button,div#__marp-vscode > div > svg > foreignObject > section [type=search]::-webkit-search-decoration{
+  -webkit-appearance:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ::-webkit-input-placeholder{
+  color:inherit;
+  opacity:.54;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ::-webkit-file-upload-button{
+  -webkit-appearance:button;
+  font:inherit;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section a:hover{
+  text-decoration:underline;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ::-moz-placeholder{
+  color:var(--color-fg-subtle);
+  opacity:1;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ::placeholder{
+  color:var(--color-fg-subtle);
+  opacity:1;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section hr::after,div#__marp-vscode > div > svg > foreignObject > section hr::before{
+  content:"";
+  display:table;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section hr::after{
+  clear:both;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section table{
+  border-collapse:collapse;
+  border-spacing:0;
+  display:block;
+  max-width:100%;
+  overflow:auto;
+  width:-moz-max-content;
+  width:max-content;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section td,div#__marp-vscode > div > svg > foreignObject > section th{
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section details summary{
+  cursor:pointer;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section details:not([open]) > *:not(summary){
+  display:none !important;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [role=button]:focus,div#__marp-vscode > div > svg > foreignObject > section a:focus,div#__marp-vscode > div > svg > foreignObject > section input[type=checkbox]:focus,div#__marp-vscode > div > svg > foreignObject > section input[type=radio]:focus{
+  box-shadow:none;
+  outline:2px solid var(--color-accent-fg);
+  outline-offset:-2px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [role=button]:focus:not(:focus-visible),div#__marp-vscode > div > svg > foreignObject > section a:focus:not(:focus-visible),div#__marp-vscode > div > svg > foreignObject > section input[type=checkbox]:focus:not(:focus-visible),div#__marp-vscode > div > svg > foreignObject > section input[type=radio]:focus:not(:focus-visible){
+  outline:1px solid transparent;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [role=button]:focus-visible,div#__marp-vscode > div > svg > foreignObject > section a:focus-visible,div#__marp-vscode > div > svg > foreignObject > section input[type=checkbox]:focus-visible,div#__marp-vscode > div > svg > foreignObject > section input[type=radio]:focus-visible{
+  box-shadow:none;
+  outline:2px solid var(--color-accent-fg);
+  outline-offset:-2px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section a:not([class]):focus,div#__marp-vscode > div > svg > foreignObject > section a:not([class]):focus-visible,div#__marp-vscode > div > svg > foreignObject > section input[type=checkbox]:focus,div#__marp-vscode > div > svg > foreignObject > section input[type=checkbox]:focus-visible,div#__marp-vscode > div > svg > foreignObject > section input[type=radio]:focus,div#__marp-vscode > div > svg > foreignObject > section input[type=radio]:focus-visible{
+  outline-offset:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section kbd{
+  background-color:var(--color-canvas-subtle);
+  border-bottom-color:var(--color-neutral-muted);
+  border:1px solid var(--color-neutral-muted);
+  border-radius:6px;
+  box-shadow:inset 0 -1px 0 var(--color-neutral-muted);
+  color:var(--color-fg-default);
+  display:inline-block;
+  font:11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+  line-height:10px;
+  padding:3px 5px;
+  vertical-align:middle;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1),div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2),div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3),div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4),div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5),div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6){
+  font-weight:var(--base-text-weight-semibold, 600);
+  line-height:1.25;
+  margin-bottom:16px;
+  margin-top:24px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2){
+  border-bottom:1px solid var(--color-border-muted);
+  font-size:1.5em;
+  padding-bottom:.3em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2),div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3){
+  font-weight:var(--base-text-weight-semibold, 600);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3){
+  font-size:1.25em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4){
+  font-size:1em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4),div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5){
+  font-weight:var(--base-text-weight-semibold, 600);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5){
+  font-size:.875em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6){
+  color:var(--color-fg-muted);
+  font-size:.85em;
+  font-weight:var(--base-text-weight-semibold, 600);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section p{
+  margin-bottom:10px;
+  margin-top:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section blockquote{
+  border-left:.25em solid var(--color-border-default);
+  color:var(--color-fg-muted);
+  margin:0;
+  padding:0 1em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol,div#__marp-vscode > div > svg > foreignObject > section ul{
+  margin-bottom:0;
+  margin-top:0;
+  padding-left:2em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol ol,div#__marp-vscode > div > svg > foreignObject > section ul ol{
+  list-style-type:lower-roman;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol ol ol,div#__marp-vscode > div > svg > foreignObject > section ol ul ol,div#__marp-vscode > div > svg > foreignObject > section ul ol ol,div#__marp-vscode > div > svg > foreignObject > section ul ul ol{
+  list-style-type:lower-alpha;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section dd{
+  margin-left:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section code,div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre),div#__marp-vscode > div > svg > foreignObject > section samp,div#__marp-vscode > div > svg > foreignObject > section tt{
+  font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+  font-size:12px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre){
+  word-wrap:normal;
+  margin-bottom:0;
+  margin-top:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .octicon{
+  fill:currentColor;
+  display:inline-block;
+  overflow:visible !important;
+  vertical-align:text-bottom;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section input::-webkit-inner-spin-button,div#__marp-vscode > div > svg > foreignObject > section input::-webkit-outer-spin-button{
+  -webkit-appearance:none;
+  appearance:none;
+  margin:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section::after,div#__marp-vscode > div > svg > foreignObject > section::before{
+  /* content:""; */
+  display:table;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section::after{
+  clear:both;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section > *:first-child{
+  margin-top:0 !important;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section > *:last-child{
+  margin-bottom:0 !important;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section a:not([href]){
+  color:inherit;
+  text-decoration:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .absent{
+  color:var(--color-danger-fg);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .anchor{
+  float:left;
+  line-height:1;
+  margin-left:-20px;
+  padding-right:4px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .anchor:focus{
+  outline:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section blockquote,div#__marp-vscode > div > svg > foreignObject > section details,div#__marp-vscode > div > svg > foreignObject > section dl,div#__marp-vscode > div > svg > foreignObject > section ol,div#__marp-vscode > div > svg > foreignObject > section p,div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre),div#__marp-vscode > div > svg > foreignObject > section table,div#__marp-vscode > div > svg > foreignObject > section ul{
+  margin-bottom:16px;
+  margin-top:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section blockquote > :first-child{
+  margin-top:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section blockquote > :last-child{
+  margin-bottom:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1) .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2) .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3) .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4) .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5) .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6) .octicon-link{
+  color:var(--color-fg-default);
+  vertical-align:middle;
+  visibility:hidden;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1):hover .anchor,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2):hover .anchor,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3):hover .anchor,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4):hover .anchor,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5):hover .anchor,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6):hover .anchor{
+  text-decoration:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1):hover .anchor .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2):hover .anchor .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3):hover .anchor .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4):hover .anchor .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5):hover .anchor .octicon-link,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6):hover .anchor .octicon-link{
+  visibility:visible;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1) code,div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1) tt,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2) code,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2) tt,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3) code,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3) tt,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4) code,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4) tt,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5) code,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5) tt,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6) code,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6) tt{
+  font-size:inherit;
+  padding:0 .2em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section summary :is(h1, marp-h1),div#__marp-vscode > div > svg > foreignObject > section summary :is(h2, marp-h2),div#__marp-vscode > div > svg > foreignObject > section summary :is(h3, marp-h3),div#__marp-vscode > div > svg > foreignObject > section summary :is(h4, marp-h4),div#__marp-vscode > div > svg > foreignObject > section summary :is(h5, marp-h5),div#__marp-vscode > div > svg > foreignObject > section summary :is(h6, marp-h6){
+  display:inline-block;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section summary :is(h1, marp-h1) .anchor,div#__marp-vscode > div > svg > foreignObject > section summary :is(h2, marp-h2) .anchor,div#__marp-vscode > div > svg > foreignObject > section summary :is(h3, marp-h3) .anchor,div#__marp-vscode > div > svg > foreignObject > section summary :is(h4, marp-h4) .anchor,div#__marp-vscode > div > svg > foreignObject > section summary :is(h5, marp-h5) .anchor,div#__marp-vscode > div > svg > foreignObject > section summary :is(h6, marp-h6) .anchor{
+  margin-left:-40px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section summary :is(h1, marp-h1),div#__marp-vscode > div > svg > foreignObject > section summary :is(h2, marp-h2){
+  border-bottom:0;
+  padding-bottom:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol.no-list,div#__marp-vscode > div > svg > foreignObject > section ul.no-list{
+  list-style-type:none;
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol[type=a]{
+  list-style-type:lower-alpha;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol[type=A]{
+  list-style-type:upper-alpha;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol[type=i]{
+  list-style-type:lower-roman;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol[type=I]{
+  list-style-type:upper-roman;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section div > ol:not([type]),div#__marp-vscode > div > svg > foreignObject > section ol[type="1"]{
+  list-style-type:decimal;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ol ol,div#__marp-vscode > div > svg > foreignObject > section ol ul,div#__marp-vscode > div > svg > foreignObject > section ul ol,div#__marp-vscode > div > svg > foreignObject > section ul ul{
+  margin-bottom:0;
+  margin-top:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section li > p{
+  margin-top:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section li + li{
+  margin-top:.25em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section dl{
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section dl dt{
+  font-size:1em;
+  font-style:italic;
+  font-weight:var(--base-text-weight-semibold, 600);
+  margin-top:16px;
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section dl dd{
+  margin-bottom:16px;
+  padding:0 16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section table th{
+  font-weight:var(--base-text-weight-semibold, 600);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section table td,div#__marp-vscode > div > svg > foreignObject > section table th{
+  border:1px solid var(--color-border-default);
+  padding:6px 13px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section table tr{
+  background-color:var(--color-canvas-default);
+  border-top:1px solid var(--color-border-muted);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section table tr:nth-child(2n){
+  background-color:var(--color-canvas-subtle);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section table img{
+  background-color:transparent;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section img[align=right]{
+  padding-left:20px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section img[align=left]{
+  padding-right:20px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .emoji{
+  background-color:transparent;
+  max-width:none;
+  vertical-align:text-top;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).frame,div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).frame > :is(span, marp-span){
+  display:block;
+  overflow:hidden;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).frame > :is(span, marp-span){
+  border:1px solid var(--color-border-default);
+  float:left;
+  margin:13px 0 0;
+  padding:7px;
+  width:auto;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).frame :is(span, marp-span) img{
+  display:block;
+  float:left;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).frame :is(span, marp-span) :is(span, marp-span){
+  clear:both;
+  color:var(--color-fg-default);
+  display:block;
+  padding:5px 0 0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).align-center{
+  clear:both;
+  display:block;
+  overflow:hidden;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).align-center > :is(span, marp-span){
+  display:block;
+  margin:13px auto 0;
+  overflow:hidden;
+  text-align:center;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).align-center :is(span, marp-span) img{
+  margin:0 auto;
+  text-align:center;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).align-right{
+  clear:both;
+  display:block;
+  overflow:hidden;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).align-right > :is(span, marp-span){
+  display:block;
+  margin:13px 0 0;
+  overflow:hidden;
+  text-align:right;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).align-right :is(span, marp-span) img{
+  margin:0;
+  text-align:right;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).float-left{
+  display:block;
+  float:left;
+  margin-right:13px;
+  overflow:hidden;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).float-left :is(span, marp-span){
+  margin:13px 0 0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).float-right{
+  display:block;
+  float:right;
+  margin-left:13px;
+  overflow:hidden;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(span, marp-span).float-right > :is(span, marp-span){
+  display:block;
+  margin:13px auto 0;
+  overflow:hidden;
+  text-align:right;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section code,div#__marp-vscode > div > svg > foreignObject > section tt{
+  background-color:var(--color-neutral-muted);
+  border-radius:6px;
+  font-size:85%;
+  margin:0;
+  padding:.2em .4em;
+  white-space:break-spaces;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section code br,div#__marp-vscode > div > svg > foreignObject > section tt br{
+  display:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section del code{
+  text-decoration:inherit;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section samp{
+  font-size:85%;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) code{
+  font-size:100%;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) > code{
+  background:transparent;
+  border:0;
+  margin:0;
+  padding:0;
+  white-space:pre;
+  word-break:normal;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .highlight{
+  margin-bottom:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .highlight :is(pre, marp-pre){
+  margin-bottom:0;
+  word-break:normal;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre){
+  background-color:var(--color-canvas-subtle);
+  border-radius:6px;
+  font-size:85%;
+  line-height:1.45;
+  overflow:auto;
+  padding:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) code,div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) tt{
+  word-wrap:normal;
+  background-color:transparent;
+  border:0;
+  display:inline;
+  line-height:inherit;
+  margin:0;
+  max-width:auto;
+  overflow:visible;
+  padding:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .csv-data td,div#__marp-vscode > div > svg > foreignObject > section .csv-data th{
+  font-size:12px;
+  line-height:1;
+  overflow:hidden;
+  padding:5px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .csv-data .blob-num{
+  background:var(--color-canvas-default);
+  border:0;
+  padding:10px 8px 9px;
+  text-align:right;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .csv-data tr{
+  border-top:0;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .csv-data th{
+  background:var(--color-canvas-subtle);
+  border-top:0;
+  font-weight:var(--base-text-weight-semibold, 600);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [data-footnote-ref]::before{
+  content:"[";
+}
+
+div#__marp-vscode > div > svg > foreignObject > section [data-footnote-ref]::after{
+  content:"]";
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes{
+  border-top:1px solid var(--color-border-default);
+  color:var(--color-fg-muted);
+  font-size:12px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section div#__marp-vscode > div > svg > foreignObject > section section.footnotes {
+  --marpit-root-font-size:12px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes ol{
+  padding-left:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes ol ul{
+  display:inline-block;
+  margin-top:16px;
+  padding-left:16px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes li{
+  position:relative;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes li:target::before{
+  border:2px solid var(--color-accent-emphasis);
+  border-radius:6px;
+  bottom:-8px;
+  content:"";
+  left:-24px;
+  pointer-events:none;
+  position:absolute;
+  right:-8px;
+  top:-8px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes li:target{
+  color:var(--color-fg-default);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .footnotes .data-footnote-backref g-emoji{
+  font-family:monospace;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-c{
+  color:var(--color-prettylights-syntax-comment);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-c1,div#__marp-vscode > div > svg > foreignObject > section .pl-s .pl-v{
+  color:var(--color-prettylights-syntax-constant);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-e,div#__marp-vscode > div > svg > foreignObject > section .pl-en{
+  color:var(--color-prettylights-syntax-entity);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-s .pl-s1,div#__marp-vscode > div > svg > foreignObject > section .pl-smi{
+  color:var(--color-prettylights-syntax-storage-modifier-import);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-ent{
+  color:var(--color-prettylights-syntax-entity-tag);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-k{
+  color:var(--color-prettylights-syntax-keyword);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-pds,div#__marp-vscode > div > svg > foreignObject > section .pl-s,div#__marp-vscode > div > svg > foreignObject > section .pl-s .pl-pse .pl-s1,div#__marp-vscode > div > svg > foreignObject > section .pl-sr,div#__marp-vscode > div > svg > foreignObject > section .pl-sr .pl-cce,div#__marp-vscode > div > svg > foreignObject > section .pl-sr .pl-sra,div#__marp-vscode > div > svg > foreignObject > section .pl-sr .pl-sre{
+  color:var(--color-prettylights-syntax-string);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-smw,div#__marp-vscode > div > svg > foreignObject > section .pl-v{
+  color:var(--color-prettylights-syntax-variable);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-bu{
+  color:var(--color-prettylights-syntax-brackethighlighter-unmatched);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-ii{
+  background-color:var(--color-prettylights-syntax-invalid-illegal-bg);
+  color:var(--color-prettylights-syntax-invalid-illegal-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-c2{
+  background-color:var(--color-prettylights-syntax-carriage-return-bg);
+  color:var(--color-prettylights-syntax-carriage-return-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-sr .pl-cce{
+  color:var(--color-prettylights-syntax-string-regexp);
+  font-weight:700;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-ml{
+  color:var(--color-prettylights-syntax-markup-list);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mh,div#__marp-vscode > div > svg > foreignObject > section .pl-mh .pl-en,div#__marp-vscode > div > svg > foreignObject > section .pl-ms{
+  color:var(--color-prettylights-syntax-markup-heading);
+  font-weight:700;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mi{
+  color:var(--color-prettylights-syntax-markup-italic);
+  font-style:italic;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mb{
+  color:var(--color-prettylights-syntax-markup-bold);
+  font-weight:700;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-md{
+  background-color:var(--color-prettylights-syntax-markup-deleted-bg);
+  color:var(--color-prettylights-syntax-markup-deleted-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mi1{
+  background-color:var(--color-prettylights-syntax-markup-inserted-bg);
+  color:var(--color-prettylights-syntax-markup-inserted-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mc{
+  background-color:var(--color-prettylights-syntax-markup-changed-bg);
+  color:var(--color-prettylights-syntax-markup-changed-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mi2{
+  background-color:var(--color-prettylights-syntax-markup-ignored-bg);
+  color:var(--color-prettylights-syntax-markup-ignored-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-mdr{
+  color:var(--color-prettylights-syntax-meta-diff-range);
+  font-weight:700;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-ba{
+  color:var(--color-prettylights-syntax-brackethighlighter-angle);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-sg{
+  color:var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .pl-corl{
+  color:var(--color-prettylights-syntax-constant-other-reference-link);
+  text-decoration:underline;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section g-emoji{
+  display:inline-block;
+  font-family:Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-size:1em;
+  font-style:normal !important;
+  font-weight:var(--base-text-weight-normal, 400);
+  line-height:1;
+  min-width:1ch;
+  vertical-align:-.075em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section g-emoji img{
+  height:1em;
+  width:1em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .task-list-item{
+  list-style-type:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .task-list-item label{
+  font-weight:var(--base-text-weight-normal, 400);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .task-list-item.enabled label{
+  cursor:pointer;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .task-list-item + .task-list-item{
+  margin-top:4px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .task-list-item .handle{
+  display:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .task-list-item-checkbox{
+  margin:0 .2em .25em -1.4em;
+  vertical-align:middle;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .contains-task-list:dir(rtl) .task-list-item-checkbox{
+  margin:0 -1.6em .25em .2em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .contains-task-list{
+  position:relative;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section .contains-task-list:focus-within .task-list-item-convert-container,div#__marp-vscode > div > svg > foreignObject > section .contains-task-list:hover .task-list-item-convert-container{
+  clip:auto;
+  display:block;
+  height:24px;
+  overflow:visible;
+  width:auto;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section ::-webkit-calendar-picker-indicator{
+  filter:invert(50%);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1){
+  color:var(--h1-color);
+  font-size:1.6em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1),div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2){
+  border-bottom:none;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2){
+  font-size:1.3em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3){
+  font-size:1.1em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4){
+  font-size:1.05em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5){
+  font-size:1em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6){
+  font-size:.9em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1) strong,div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2) strong,div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3) strong,div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4) strong,div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5) strong,div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6) strong{
+  color:var(--heading-strong-color);
+  font-weight:inherit;
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(h1, marp-h1)::part(auto-scaling),div#__marp-vscode > div > svg > foreignObject > section :is(h2, marp-h2)::part(auto-scaling),div#__marp-vscode > div > svg > foreignObject > section :is(h3, marp-h3)::part(auto-scaling),div#__marp-vscode > div > svg > foreignObject > section :is(h4, marp-h4)::part(auto-scaling),div#__marp-vscode > div > svg > foreignObject > section :is(h5, marp-h5)::part(auto-scaling),div#__marp-vscode > div > svg > foreignObject > section :is(h6, marp-h6)::part(auto-scaling){
+  max-height:563px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section hr{
+  height:0;
+  padding-top:.25em;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre){
+  border:1px solid var(--color-border-default);
+  line-height:1.15;
+  overflow:visible;
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre)::part(auto-scaling){
+  max-height:529px;
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs){
+  color:var(--color-prettylights-syntax-storage-modifier-import);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-doctag),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-keyword),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-meta .hljs-keyword),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-template-tag),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-template-variable),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-type),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-variable.language_){
+  color:var(--color-prettylights-syntax-keyword);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-title),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-title.class_),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-title.class_.inherited__),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-title.function_){
+  color:var(--color-prettylights-syntax-entity);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-attr),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-attribute),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-literal),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-meta),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-number),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-operator),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-selector-attr),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-selector-class),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-selector-id),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-variable){
+  color:var(--color-prettylights-syntax-constant);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-meta .hljs-string),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-regexp),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-string){
+  color:var(--color-prettylights-syntax-string);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-built_in),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-symbol){
+  color:var(--color-prettylights-syntax-variable);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-code),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-comment),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-formula){
+  color:var(--color-prettylights-syntax-comment);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-name),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-quote),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-selector-pseudo),div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-selector-tag){
+  color:var(--color-prettylights-syntax-entity-tag);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-subst){
+  color:var(--color-prettylights-syntax-storage-modifier-import);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-section){
+  color:var(--color-prettylights-syntax-markup-heading);
+  font-weight:700;
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-bullet){
+  color:var(--color-prettylights-syntax-markup-list);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-emphasis){
+  color:var(--color-prettylights-syntax-markup-italic);
+  font-style:italic;
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-strong){
+  color:var(--color-prettylights-syntax-markup-bold);
+  font-weight:700;
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-addition){
+  background-color:var(--color-prettylights-syntax-markup-inserted-bg);
+  color:var(--color-prettylights-syntax-markup-inserted-text);
+}
+div#__marp-vscode > div > svg > foreignObject > section :is(pre, marp-pre) :where(.hljs-deletion){
+  background-color:var(--color-prettylights-syntax-markup-deleted-bg);
+  color:var(--color-prettylights-syntax-markup-deleted-text);
+}
+
+div#__marp-vscode > div > svg > foreignObject > section footer,div#__marp-vscode > div > svg > foreignObject > section header{
+  color:var(--header-footer-color);
+  font-size:18px;
+  left:30px;
+  margin:0;
+  position:absolute;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section header{
+  top:21px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section footer{
+  bottom:21px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section{
+  --h1-color:#246;
+  --header-footer-color:hsla(0,0%,40%,.75);
+  --heading-strong-color:#48c;
+  --paginate-color:#777;
+  align-items:stretch;
+  display:flex;
+  flex-flow:column nowrap;
+  font-size:29px;
+  height:720px;
+  justify-content:center;
+  padding:78.5px;
+  width:1280px;
+}
+
+div#__marp-vscode > div > svg > foreignObject > section {
+  --marpit-root-font-size:29px;
+}
+div#__marp-vscode > div > svg > foreignObject > section:where(.invert){
+  --h1-color:#cee7ff;
+  --header-footer-color:hsla(0,0%,60%,.75);
+  --heading-strong-color:#7bf;
+  --paginate-color:#999;
+}
+div#__marp-vscode > div > svg > foreignObject > section > *:last-child,div#__marp-vscode > div > svg > foreignObject > section[data-footer] > :nth-last-child(2){
+  margin-bottom:0;
+}
+div#__marp-vscode > div > svg > foreignObject > section > *:first-child,div#__marp-vscode > div > svg > foreignObject > section > header:first-child + *{
+  margin-top:0;
+}
+div#__marp-vscode > div > svg > foreignObject > section::after{
+  bottom:21px;
+  color:var(--paginate-color);
+  font-size:24px;
+  padding:0;
+  position:absolute;
+  right:30px;
+}
+div#__marp-vscode > div > svg > foreignObject > section::after {
+  --marpit-root-font-size:24px;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-color] :is(h1, marp-h1),div#__marp-vscode > div > svg > foreignObject > section[data-color] :is(h2, marp-h2),div#__marp-vscode > div > svg > foreignObject > section[data-color] :is(h3, marp-h3),div#__marp-vscode > div > svg > foreignObject > section[data-color] :is(h4, marp-h4),div#__marp-vscode > div > svg > foreignObject > section[data-color] :is(h5, marp-h5),div#__marp-vscode > div > svg > foreignObject > section[data-color] :is(h6, marp-h6){
+  color:currentcolor;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"] {
+  columns: initial !important;
+  display: block !important;
+  padding: 0 !important;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"]::before,
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"]::after,
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="content"]::before,
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="content"]::after {
+  display: none !important;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] {
+  all: initial;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container][data-marpit-advanced-background-direction="vertical"] {
+  flex-direction: column;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split] > div[data-marpit-advanced-background-container] {
+  width: var(--marpit-advanced-background-split, 50%);
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"][data-marpit-advanced-background-split="right"] > div[data-marpit-advanced-background-container] {
+  margin-left: calc(100% - var(--marpit-advanced-background-split, 50%));
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="background"] > div[data-marpit-advanced-background-container] > figure {
+  all: initial;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: auto;
+  margin: 0;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="content"],
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="pseudo"] {
+  background: transparent !important;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background="pseudo"],
+div#__marp-vscode > div > svg[data-marpit-svg] > foreignObject[data-marpit-advanced-background="pseudo"] {
+  pointer-events: none !important;
+}
+div#__marp-vscode > div > svg > foreignObject > section[data-marpit-advanced-background-split] {
+  width: 100%;
+  height: 100%;
+}</style><div id="__marp-vscode"><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="0"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="1">
+<h1 class="code-line" data-line="5">CS100 Recitation 9</h1>
+<p class="code-line" data-line="7">GKxx</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="9"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="2">
+<h2 class="code-line" data-line="11">Contents</h2>
+<ul class="code-line" data-line="13">
+<li class="code-line" data-line="13">拷贝控制：以 <code>Dynarray</code> 为例</li>
+<li class="code-line" data-line="14"><code>static</code> 成员</li>
+<li class="code-line" data-line="15">初识类型推导：<code>auto</code> 和 <code>decltype</code></li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="17"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="3">
+<h1 class="code-line" data-line="19">拷贝控制：以 <code>Dynarray</code> 为例</h1>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="21"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="4">
+<h2 class="code-line" data-line="23">设计</h2>
+<p class="code-line" data-line="25">实现一个“动态数组”：</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="27"><span class="hljs-type">int</span> n; std::cin &gt;&gt; n;
+<span class="hljs-function">Dynarray <span class="hljs-title">arr</span><span class="hljs-params">(n)</span></span>; <span class="hljs-comment">// arr has n value-initialized ints.</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i != n; ++i)
+  std::cin &gt;&gt; arr.<span class="hljs-built_in">at</span>(i); <span class="hljs-comment">// arr.at(i) is just like arr[i]</span>
+                         <span class="hljs-comment">// 如何做到 arr[i]？以后再说</span>
+<span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i != arr.<span class="hljs-built_in">size</span>(); ++i)
+  arr.<span class="hljs-built_in">at</span>(i) += arr.<span class="hljs-built_in">at</span>(i - <span class="hljs-number">1</span>) * <span class="hljs-number">2</span>;
+<span class="hljs-comment">// ...</span>
+</code></pre>
+<p class="code-line" data-line="38">最后 <code>arr</code> 应当自己释放自己所占用的内存。</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="40"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="5">
+<h2 class="code-line" data-line="42">Dynarray：成员、构造函数</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="44"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+  std::<span class="hljs-type">size_t</span> m_size;
+  <span class="hljs-type">int</span> *m_storage;
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">Dynarrray</span>(std::<span class="hljs-type">size_t</span> n)
+    : <span class="hljs-built_in">m_size</span>(n), <span class="hljs-built_in">m_storage</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[n]{}) {}
+  <span class="hljs-function">std::<span class="hljs-type">size_t</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>{ <span class="hljs-keyword">return</span> m_size; }
+};
+</code></pre>
+<ul class="code-line" data-line="55">
+<li class="code-line" data-line="55">这个类需要一个默认构造函数吗？</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="57"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="6">
+<h2 class="code-line" data-line="59">Dynarray：成员、构造函数</h2>
+<p class="code-line" data-line="61">假如我们需要一个默认构造函数，它应当具有什么行为？</p>
+<ul class="code-line" data-line="62">
+<li class="code-line" data-line="62">初始化为 <code>0</code> 个元素的数组？
+<ul class="code-line" data-line="63">
+<li class="code-line" data-line="63">这样的数组能使用吗？</li>
+</ul>
+</li>
+<li class="code-line" data-line="64">初始化为 <code>DYNARRAY_DEFAULT_SIZE</code> 个元素的数组？</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="66"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="7">
+<h2 class="code-line" data-line="68">Dynarray：成员、构造函数</h2>
+<p class="code-line" data-line="70">假如我们需要一个默认构造函数，它应当具有什么行为？</p>
+<ul class="code-line" data-line="71">
+<li class="code-line" data-line="71">初始化为 <code>0</code> 个元素的数组？
+<ul class="code-line" data-line="72">
+<li class="code-line" data-line="72">在不知道如何拷贝的情况下，我们似乎没有什么能改变数组大小的操作。</li>
+<li class="code-line" data-line="73">如果不能改变大小，那“<code>0</code> 个元素的数组”有什么用？</li>
+</ul>
+</li>
+<li class="code-line" data-line="74">初始化为 <code>DYNARRAY_DEFAULT_SIZE</code> 个元素的数组？
+<ul class="code-line" data-line="75">
+<li class="code-line" data-line="75">也许在某些应用场景下，这是合理的。</li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="77"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="8">
+<h2 class="code-line" data-line="79">析构函数 (destructor, dtor)</h2>
+<p class="code-line" data-line="81"><code>Dynarray</code> 必须在自己不再被使用的时候释放所拥有的内存：</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="83"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">fun</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-function">Dynarray <span class="hljs-title">a</span><span class="hljs-params">(n)</span></span>;
+  <span class="hljs-keyword">if</span> (condition) {
+    <span class="hljs-function">Dynarray <span class="hljs-title">b</span><span class="hljs-params">(m)</span></span>;
+    <span class="hljs-comment">// ...</span>
+  } <span class="hljs-comment">// Now b should release the memory it allocated.</span>
+  <span class="hljs-comment">// ...</span>
+} <span class="hljs-comment">// Now a should release the memory it allocated.</span>
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="94"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="9">
+<h2 class="code-line" data-line="96">析构函数 (destructor, dtor)</h2>
+<p class="code-line" data-line="98"><strong>析构函数</strong>是在这个对象被销毁的时候自动调用的函数。</p>
+<ul class="code-line" data-line="99">
+<li class="code-line" data-line="99">它通常用来完成一些最后的清理</li>
+<li class="code-line" data-line="100">特别地，那些<strong>拥有一定资源</strong>的类通常在析构函数里释放它们所拥有的资源</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="102"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="10">
+<h2 class="code-line" data-line="104">定义一个析构函数</h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="109"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+  std::string name;
+  std::string id;
+  <span class="hljs-type">int</span> entranceYear;
+ <span class="hljs-keyword">public</span>:
+  ~<span class="hljs-built_in">Student</span>() {
+    std::cout &lt;&lt; <span class="hljs-string">&quot;dtor of &quot;</span>
+              &lt;&lt; name &lt;&lt; <span class="hljs-string">&quot;called.\n&quot;</span>;
+  }
+};
+</code></pre>
+  </div>
+  <div>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="124">{
+  <span class="hljs-function">Student <span class="hljs-title">alice</span><span class="hljs-params">(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;2020123123&quot;</span>)</span></span>;
+  <span class="hljs-keyword">if</span> (condition) {
+    <span class="hljs-function">Student <span class="hljs-title">bob</span><span class="hljs-params">(<span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;2020123124&quot;</span>)</span></span>;
+    <span class="hljs-comment">// ...</span>
+  } <span class="hljs-comment">// Output &quot;dtor of Bob called.&quot;</span>
+} <span class="hljs-comment">// Output &quot;dtor of Alice called.&quot;</span>
+</code></pre>
+  </div>
+</div>
+<ul class="code-line" data-line="136">
+<li class="code-line" data-line="136">析构函数的名字是 <code>~ClassName</code></li>
+<li class="code-line" data-line="137">析构函数不接受参数，不声明返回值类型</li>
+<li class="code-line" data-line="138">一个类只能有一个析构函数 <a href="https://en.cppreference.com/w/cpp/language/destructor#Prospective_destructor">(until C++20)</a></li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="140"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="11">
+<h2 class="code-line" data-line="142">Dynarray：析构函数</h2>
+<p class="code-line" data-line="144">非常直接的实现</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="146"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+  std::<span class="hljs-type">size_t</span> m_size;
+  <span class="hljs-type">int</span> *m_storage;
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">Dynarray</span>(std::<span class="hljs-type">size_t</span> n)
+    : <span class="hljs-built_in">m_size</span>(n), <span class="hljs-built_in">m_storage</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">int</span>[n]{}) {}
+  ~<span class="hljs-built_in">Dynarray</span>() {
+    <span class="hljs-keyword">delete</span>[] m_storage;
+  }
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="159"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="12">
+<h2 class="code-line" data-line="161">析构函数的具体行为</h2>
+<p class="code-line" data-line="163">考虑一个问题：<code>Student</code> 是否拥有什么资源？</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="165"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+  std::string name;
+  std::string id;
+  <span class="hljs-type">int</span> entranceYear;
+  <span class="hljs-comment">// ...</span>
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="174"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="13">
+<h2 class="code-line" data-line="176">析构函数的具体行为</h2>
+<p class="code-line" data-line="178"><code>Student</code> 本身不拥有什么资源，但是 <code>std::string</code> 有。</p>
+<ul class="code-line" data-line="179">
+<li class="code-line" data-line="179"><code>std::string</code> 当然会在它自己的析构函数里释放内存。</li>
+</ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="181"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+  std::string name;
+  std::string id;
+  <span class="hljs-type">int</span> entranceYear;
+  <span class="hljs-comment">// ...</span>
+};
+</code></pre>
+<p class="code-line" data-line="190">在一个 <code>Student</code> 被销毁的时候：</p>
+<ul class="code-line" data-line="191">
+<li class="code-line" data-line="191">它显然应该销毁它的所有成员</li>
+<li class="code-line" data-line="192">销毁一个成员，显然应该调用那个成员的析构函数。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="194"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="14">
+<h2 class="code-line" data-line="196">析构函数的具体行为</h2>
+<p class="code-line" data-line="198"><strong>析构函数在执行完函数体之后，会自动销毁它的所有数据成员</strong></p>
+<ul class="code-line" data-line="199">
+<li class="code-line" data-line="199">对于类类型成员，会调用它的析构函数来销毁它。</li>
+<li class="code-line" data-line="200">猜猜销毁成员的顺序？</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="202"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="15">
+<h2 class="code-line" data-line="204">析构函数的具体行为</h2>
+<p class="code-line" data-line="206"><strong>析构函数在执行完函数体之后，会自动销毁它的所有数据成员</strong></p>
+<ul class="code-line" data-line="207">
+<li class="code-line" data-line="207">对于类类型成员，会调用它的析构函数来销毁它。</li>
+<li class="code-line" data-line="208">按照成员的声明顺序<strong>倒序</strong>销毁它们。</li>
+</ul>
+<p class="code-line" data-line="210">对比一下构造函数：</p>
+<ul class="code-line" data-line="211">
+<li class="code-line" data-line="211">在执行函数体<strong>之前</strong>初始化所有成员。</li>
+<li class="code-line" data-line="212">对于类类型成员，调用它的构造函数进行初始化。</li>
+<li class="code-line" data-line="213">初始化的顺序是成员的声明顺序。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="215"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="16">
+<h2 class="code-line" data-line="217">析构函数的具体行为</h2>
+<p class="code-line" data-line="219">对于成员的销毁是不需要我们写的，会自动完成。</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="221"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> {
+  std::string name;
+  std::string id;
+  <span class="hljs-type">int</span> entranceYear;
+ <span class="hljs-keyword">public</span>:
+  ~<span class="hljs-built_in">Student</span>() {} <span class="hljs-comment">// 编译器会在最后插入代码来调用 id 和 name 的析构函数。</span>
+};
+</code></pre>
+<p class="code-line" data-line="231"><code>Student</code> 类的析构函数只需一个空函数体即可。</p>
+<p class="code-line" data-line="233">等价的写法：<code>~Student() = default;</code></p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="235"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="17">
+<h2 class="code-line" data-line="237">一个类不能没有析构函数，就像...</h2>
+<p class="code-line" data-line="239">如果一个类的析构函数是不可调用的，就意味着它无法被销毁</p>
+<ul class="code-line" data-line="240">
+<li class="code-line" data-line="240">就如同不可降解的塑料</li>
+</ul>
+<p class="code-line" data-line="242">因此 C++ 不允许定义这样的类的对象！</p>
+<p class="code-line" data-line="244">什么情况下析构函数不可调用？</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="246"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="18">
+<h2 class="code-line" data-line="248">一个类不能没有析构函数，就像...</h2>
+<p class="code-line" data-line="250">如果一个类的析构函数是不可调用的，就意味着它无法被销毁</p>
+<p class="code-line" data-line="252">因此 C++ 不允许定义这样的类的对象！</p>
+<p class="code-line" data-line="254">什么情况下析构函数不可调用？</p>
+<ul class="code-line" data-line="255">
+<li class="code-line" data-line="255">你可以显式地 <code>~ClassName() = delete;</code> 将析构函数定义为“删除的”。</li>
+<li class="code-line" data-line="256">如果析构函数是 <code>private</code> 的，它就不能在类外、<code>friend</code> 外被调用。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="258"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="19">
+<h2 class="code-line" data-line="260"><code>new</code> 和 <code>delete</code></h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="262">std::string *p = <span class="hljs-keyword">new</span> std::<span class="hljs-built_in">string</span>(<span class="hljs-string">&quot;Hello&quot;</span>);
+std::cout &lt;&lt; *p &lt;&lt; std::endl;
+<span class="hljs-keyword">delete</span> p;
+p = <span class="hljs-keyword">new</span> std::string; <span class="hljs-comment">// 调用默认构造函数，*p 为空串 &quot;&quot;</span>
+std::cout &lt;&lt; p-&gt;<span class="hljs-built_in">size</span>() &lt;&lt; std::endl;
+<span class="hljs-keyword">delete</span> p;
+</code></pre>
+<p class="code-line" data-line="271"><code>new</code> 表达式会<strong>先分配内存</strong>，然后<strong>构造对象</strong>。</p>
+<ul class="code-line" data-line="272">
+<li class="code-line" data-line="272">如果这是一个类类型，它必然会调用一个构造函数来构造对象。在没有指定如何构造的情况下，它会调用<strong>默认构造函数</strong>。</li>
+<li class="code-line" data-line="273">相比之下，来自 C 的 <code>malloc</code> 只会分配内存，不构造任何对象（不做任何初始化）。<code>calloc</code> 会将这个内存<strong>清零</strong>，而非调用默认构造函数。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="275"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="20">
+<h2 class="code-line" data-line="277"><code>new</code> 和 <code>delete</code></h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="279">std::string *p = <span class="hljs-keyword">new</span> std::<span class="hljs-built_in">string</span>(<span class="hljs-string">&quot;Hello&quot;</span>);
+std::cout &lt;&lt; *p &lt;&lt; std::endl;
+<span class="hljs-keyword">delete</span> p;
+p = <span class="hljs-keyword">new</span> std::string; <span class="hljs-comment">// 调用了默认构造函数，*p 为空串 &quot;&quot;</span>
+std::cout &lt;&lt; p-&gt;<span class="hljs-built_in">size</span>() &lt;&lt; std::endl;
+<span class="hljs-keyword">delete</span> p;
+</code></pre>
+<p class="code-line" data-line="288"><code>delete</code> 表达式会<strong>先销毁对象</strong>，然后释放这片内存。</p>
+<ul class="code-line" data-line="289">
+<li class="code-line" data-line="289">如果这是一个类类型，它必然会调用析构函数来销毁这个对象。</li>
+<li class="code-line" data-line="290">相比之下，<code>free</code> 只释放内存，不调用析构函数。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="292"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="21">
+<h2 class="code-line" data-line="294"><code>Dynarray</code>：元素访问</h2>
+<p class="code-line" data-line="296"><code>.at(i)</code> 应该返回什么？</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="298"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+  std::<span class="hljs-type">size_t</span> m_size;
+  <span class="hljs-type">int</span> *m_storage;
+ <span class="hljs-keyword">public</span>:
+  ??? <span class="hljs-built_in">at</span>(std::<span class="hljs-type">size_t</span> n) {
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="309"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="22">
+<h2 class="code-line" data-line="311"><code>Dynarray</code>：元素访问</h2>
+<p class="code-line" data-line="313">如果我们希望通过 <code>arr.at(i)</code> 来修改这个元素，那必然要返回引用。</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="315"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+  std::<span class="hljs-type">size_t</span> m_size;
+  <span class="hljs-type">int</span> *m_storage;
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+</code></pre>
+<p class="code-line" data-line="326">这样可以吗？</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="328"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="23">
+<h2 class="code-line" data-line="330"><code>Dynarray</code>：元素访问</h2>
+<p class="code-line" data-line="332">试一试：</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="334"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">const</span> Dynarray &amp;arr)</span> </span>{
+  <span class="hljs-keyword">for</span> (std::<span class="hljs-type">size_t</span> i = <span class="hljs-number">0</span>; i != arr.<span class="hljs-built_in">size</span>(); ++i)
+    std::cout &lt;&lt; arr.<span class="hljs-built_in">at</span>(i) &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span>;
+}
+</code></pre>
+<p class="code-line" data-line="341">无法编译：<code>at</code> 不是 <code>const</code> 成员函数，无法在 <code>const Dynarray &amp;</code> 上调用！</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="343"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="24">
+<h2 class="code-line" data-line="345"><code>Dynarray</code>：元素访问</h2>
+<p class="code-line" data-line="347">加个 <code>const</code>？</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="349"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+  std::<span class="hljs-type">size_t</span> m_size;
+  <span class="hljs-type">int</span> *m_storage;
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+</code></pre>
+<p class="code-line" data-line="360">结果是在 <code>const Dynarray</code> 上，你可以得到其中元素的 non-<code>const</code> 引用，进而修改它！</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="362"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="25">
+<h2 class="code-line" data-line="364"><code>Dynarray</code>：元素访问</h2>
+<p class="code-line" data-line="366">正确的解决方案：<code>const</code> 和 non-<code>const</code> 的重载</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="368"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+  std::<span class="hljs-type">size_t</span> m_size;
+  <span class="hljs-type">int</span> *m_storage;
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+</code></pre>
+<ul class="code-line" data-line="382">
+<li class="code-line" data-line="382">在 <code>const</code> 对象上，它只能调用 <code>const</code> 版本，得到 reference-to-<code>const</code>，无法修改</li>
+<li class="code-line" data-line="383">在非 <code>const</code> 对象上会调用哪个？</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="385"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="26">
+<h2 class="code-line" data-line="387"><code>Dynarray</code>：元素访问</h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="392"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+arr.<span class="hljs-built_in">at</span>(i) = <span class="hljs-number">42</span>;
+</code></pre>
+  </div>
+  <div>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="407"><span class="hljs-comment">// 左边的代码就如同：</span>
+<span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(<span class="hljs-type">const</span> Dynarray *<span class="hljs-keyword">this</span>,
+              std::<span class="hljs-type">size_t</span> n)</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;m_storage[n];
+}
+<span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(Dynarray *<span class="hljs-keyword">this</span>, std::<span class="hljs-type">size_t</span> n)</span></span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;m_storage[n];
+}
+<span class="hljs-built_in">at</span>(&amp;arr, i) = <span class="hljs-number">42</span>;
+</code></pre>
+  </div>
+</div>
+<ul class="code-line" data-line="423">
+<li class="code-line" data-line="423">在 <code>const</code> 对象上，它只能调用 <code>const</code> 版本，得到 reference-to-<code>const</code>，无法修改</li>
+<li class="code-line" data-line="424">在非 <code>const</code> 对象上：两个版本都可以调用，但是
+<ul class="code-line" data-line="425">
+<li class="code-line" data-line="425">调用 non-<code>const</code> 版本是完美匹配，调用 <code>const</code> 版本是<strong>添加底层 <code>const</code></strong>，因此前者是更好的匹配。</li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="427"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="27">
+<h2 class="code-line" data-line="429">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<p class="code-line" data-line="431">假如我们要模仿标准库的行为的话，<code>at</code> 函数应该提供边界检查...</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="433"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">if</span> (n &gt;= m_length) <span class="hljs-comment">// 为什么不需要判断 n &lt; 0？</span>
+      <span class="hljs-keyword">throw</span> std::out_of_range{<span class="hljs-string">&quot;Dynarray subscript out of range.&quot;</span>};
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n &gt;= m_length)
+      <span class="hljs-keyword">throw</span> std::out_of_range{<span class="hljs-string">&quot;Dynarray subscript out of range.&quot;</span>};
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="449"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="28">
+<h2 class="code-line" data-line="451">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<p class="code-line" data-line="453">假如我们还想在 <code>at</code> 访问中做一些其它的记录和检查...</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="455"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">if</span> (n &gt;= m_length)
+      <span class="hljs-keyword">throw</span> std::out_of_range{<span class="hljs-string">&quot;Dynarray subscript out of range.&quot;</span>};
+    <span class="hljs-built_in">log_access</span>();
+    <span class="hljs-built_in">verify_integrity</span>();
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n &gt;= m_length)
+      <span class="hljs-keyword">throw</span> std::out_of_range{<span class="hljs-string">&quot;Dynarray subscript out of range.&quot;</span>};
+    <span class="hljs-built_in">log_access</span>();
+    <span class="hljs-built_in">verify_integrity</span>();
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="475"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="29">
+<h2 class="code-line" data-line="477">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<p class="code-line" data-line="479">将一模一样的代码编写两遍实在是太麻烦了... 有没有办法避免重复？</p>
+<ul class="code-line" data-line="480">
+<li class="code-line" data-line="480"><a href="https://en.cppreference.com/w/cpp/language/member_functions#Explicit_object_parameter">C++23 deducing-this</a> 能帮得上忙</li>
+</ul>
+<p class="code-line" data-line="482">假如没有额外的语法特性... 能不能让一个函数调用另一个？</p>
+<ul class="code-line" data-line="483">
+<li class="code-line" data-line="483">让谁调用谁？</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="485"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="30">
+<h2 class="code-line" data-line="487">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<p class="code-line" data-line="489">将一模一样的代码编写两遍实在是太麻烦了... 有没有办法避免重复？</p>
+<ul class="code-line" data-line="490">
+<li class="code-line" data-line="490"><a href="https://en.cppreference.com/w/cpp/language/member_functions#Explicit_object_parameter">C++23 deducing-this</a> 能帮得上忙</li>
+</ul>
+<p class="code-line" data-line="492">假如没有额外的语法特性... 能不能让一个函数调用另一个？</p>
+<p class="code-line" data-line="494">假如我们让 non-<code>const</code> 版本的函数调用 <code>const</code> 版本的函数：</p>
+<ul class="code-line" data-line="495">
+<li class="code-line" data-line="495">首先，我们需要显式地为 <code>this</code> 添加底层 <code>const</code>。</li>
+<li class="code-line" data-line="496"><code>const</code> 版本的函数返回的是 <code>const int &amp;</code>，我们得把它的底层 <code>const</code> 去除。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="498"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="31">
+<h2 class="code-line" data-line="500">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<ul class="code-line" data-line="502">
+<li class="code-line" data-line="502">先用 <code>static_cast&lt;const Dynarray *&gt;(this)</code> 为 <code>this</code> 添加底层 <code>const</code></li>
+<li class="code-line" data-line="503">这时调用 <code>-&gt;at(n)</code>，就会匹配 <code>const</code> 版本的 <code>at</code></li>
+<li class="code-line" data-line="504">将返回的 <code>const int &amp;</code> 的底层 <code>const</code> 用 <code>const_cast</code> 去除</li>
+</ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="506"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">if</span> (n &gt;= m_length)
+      <span class="hljs-keyword">throw</span> std::out_of_range{<span class="hljs-string">&quot;Dynarray subscript out of range.&quot;</span>};
+    <span class="hljs-built_in">log_access</span>();
+    <span class="hljs-built_in">verify_integrity</span>();
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">const_cast</span>&lt;<span class="hljs-type">int</span> &amp;&gt;(<span class="hljs-built_in">static_cast</span>&lt;<span class="hljs-type">const</span> Dynarray *&gt;(<span class="hljs-keyword">this</span>)-&gt;<span class="hljs-built_in">at</span>(n));
+  }
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="522"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="32">
+<h2 class="code-line" data-line="524">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<p class="code-line" data-line="526">能不能反过来，让 <code>const</code> 版本调用 non-<code>const</code> 版本？</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="528"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Dynarray</span> {
+ <span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> </span>{
+    <span class="hljs-keyword">if</span> (n &gt;= m_length)
+      <span class="hljs-keyword">throw</span> std::out_of_range{<span class="hljs-string">&quot;Dynarray subscript out of range.&quot;</span>};
+    <span class="hljs-built_in">log_access</span>();
+    <span class="hljs-built_in">verify_integrity</span>();
+    <span class="hljs-keyword">return</span> m_storage[n];
+  }
+  <span class="hljs-function"><span class="hljs-type">const</span> <span class="hljs-type">int</span> &amp;<span class="hljs-title">at</span><span class="hljs-params">(std::<span class="hljs-type">size_t</span> n)</span> <span class="hljs-type">const</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">const_cast</span>&lt;Dynarray *&gt;(<span class="hljs-keyword">this</span>)-&gt;<span class="hljs-built_in">at</span>(n);
+  }
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="544"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="33">
+<h2 class="code-line" data-line="546">在 <code>const</code> vs non-<code>const</code> 重载中避免重复</h2>
+<p class="code-line" data-line="548">能不能反过来，让 <code>const</code> 版本调用 non-<code>const</code> 版本？</p>
+<ul class="code-line" data-line="549">
+<li class="code-line" data-line="549"><strong>不能</strong>！<code>const</code> 成员函数里一定不会修改对象的状态，但是 non-<code>const</code> 成员函数并没有这般承诺！</li>
+<li class="code-line" data-line="550">如果在 non-<code>const</code> 版本的实现里一不小心修改了对象的状态，让 <code>const</code> 版本调用它将导致灾难。</li>
+</ul>
+<p class="code-line" data-line="552">比较一下两种方法中对于“危险的” <code>const_cast</code> 的使用？</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="554"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="34">
+<h2 class="code-line" data-line="556">为何要将数据成员私有化？</h2>
+<p class="code-line" data-line="558">—— 为了“封装”<br />
+—— 那什么是“封装”？</p>
+<p class="code-line" data-line="561">当我说“你的这个代码封装性不好”的时候，我究竟表达的是什么意思？</p>
+<p class="code-line" data-line="563">《Effective C++》条款22。</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="565"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="35">
+<h1 class="code-line" data-line="567"><code>static</code> 成员</h1>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="569"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="36">
+<h2 class="code-line" data-line="571">回忆变量上的 <code>static</code> 关键词</h2>
+<p class="code-line" data-line="573"><code>static</code> 变量只在声明语句第一次被执行时初始化，后续遇到声明语句将不会重复初始化。生命周期直到程序结束，但只在声明所在的作用域可以访问。</p>
+<ul class="code-line" data-line="575">
+<li class="code-line" data-line="575">函数调用次数计数器（<code>static</code>变量在多次调用中保留状态）</li>
+</ul>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="576"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">how_many_times_called</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-type">static</span> std::<span class="hljs-type">size_t</span> times_called = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">return</span> ++times_called;
+}
+<span class="hljs-comment">// ...</span>
+std::cout &lt;&lt; <span class="hljs-built_in">how_many_times_called</span>() &lt;&lt; std::endl;
+std::cout &lt;&lt; <span class="hljs-built_in">how_many_times_called</span>() &lt;&lt; std::endl;
+std::cout &lt;&lt; times_called &lt;&lt; std::endl; <span class="hljs-comment">// Error: times_called undefined.</span>
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="586"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="37">
+<h2 class="code-line" data-line="587"><code>static</code> 成员变量</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="589"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-type">static</span> <span class="hljs-type">int</span> something;
+};
+</code></pre>
+<p class="code-line" data-line="596">类似的想法：这个语句应该不会重复创建 <code>something</code>？<br />
+具体一些：在它所在的作用域（<code>class A</code> 里）只会创建一个 <code>something</code>。它不属于哪个特定的 <code>A</code> 类型对象，而是属于整个 <code>A</code> 类。</p>
+<ul class="code-line" data-line="598">
+<li class="code-line" data-line="598">甚至就算还没有任何 <code>A</code> 类型对象被定义，它也已经存在了！</li>
+</ul>
+<p class="code-line" data-line="600">它的作用域属于 <code>class A</code>，因此：</p>
+<ul class="code-line" data-line="601">
+<li class="code-line" data-line="601">在 <code>A</code> 类的成员函数中可以直接以 <code>something</code> 来访问它。</li>
+<li class="code-line" data-line="602">在 <code>A</code> 类以外，用 <code>A::something</code> 来访问它（因为 <code>public</code> 而不是 <code>private</code>）。</li>
+<li class="code-line" data-line="603">如果你有任何 <code>A</code> 类型的对象，比如叫<code>a1</code>和<code>a2</code>，那么也可以用 <code>a1.something</code> 或 <code>a2.something</code> 来访问 <code>A::something</code>。它们都是<strong>同一个</strong>变量。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="605"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="38">
+<h2 class="code-line" data-line="606">特别注意：初始化 <code>static</code> 成员变量</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="607"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-type">static</span> <span class="hljs-type">int</span> something = <span class="hljs-number">0</span>; <span class="hljs-comment">// Error: </span>
+  <span class="hljs-comment">// Cannot initialize a non-const static member</span>
+};
+</code></pre>
+<p class="code-line" data-line="614">类内只允许声明，而 <code>static</code> 成员变量应当属于静态内存，应在全局作用域内初始化，而不能在 <code>A</code> 类中、<code>A</code> 的构造函数中、或者任何函数（比如 <code>main</code>）中被第一次初始化。</p>
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div>
+(before C++17) 
+<p class="code-line" data-line="620">在 <code>A</code> 类里声明，需要全局显式定义：</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="622"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-type">static</span> <span class="hljs-type">int</span> something;
+};
+<span class="hljs-type">int</span> A::something = <span class="hljs-number">0</span>; <span class="hljs-comment">// No &quot;static&quot;!</span>
+</code></pre>
+  </div>
+  <div>
+<p class="code-line" data-line="632">(since C++17) 将 <code>static</code> 成员变量声明为 <code>inline</code> 即可在类内定义：</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="633"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">inline</span> <span class="hljs-type">static</span> <span class="hljs-type">int</span> something = <span class="hljs-number">0</span>; 
+};
+</code></pre>
+  </div>
+</div>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="643"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="39">
+<h2 class="code-line" data-line="645">示例：<code>static</code> 成员变量</h2>
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="649"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">inline</span> <span class="hljs-type">static</span> <span class="hljs-type">int</span> something = <span class="hljs-number">0</span>;
+  <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">increment</span><span class="hljs-params">()</span> </span>{ something++; }
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+  std::cout &lt;&lt; A::something &lt;&lt; std::endl;
+  A a1; A a2;
+  a1.<span class="hljs-built_in">increment</span>();
+  a2.<span class="hljs-built_in">increment</span>();
+  std::cout &lt;&lt; A::something &lt;&lt; std::endl;
+  a1.something++;
+  std::cout &lt;&lt; A::something &lt;&lt; std::endl;
+  std::cout &lt;&lt; a2.something &lt;&lt; std::endl;
+</code></pre>
+  </div>
+  <div>
+输出：
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="670"><span class="hljs-number">0</span>
+<span class="hljs-number">2</span>
+<span class="hljs-number">3</span>
+<span class="hljs-number">3</span>
+</code></pre>
+  </div>
+</div>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="679"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="40">
+<h2 class="code-line" data-line="681"><code>const static</code> 成员变量</h2>
+<p class="code-line" data-line="683">我们经常会需要各种各样的常量：要不要给 <code>Dynarray</code> 一个默认 <code>DEFAULT_SIZE</code>？要不要给 <code>Student</code> 一个 <code>MIN_ENTRANCE_YEAR</code>？<br />
+这些常量只在对应的类内有意义！用宏定义或全局常量的方式会导致它们堆在一起，并且对外暴露了无意义的数据。</p>
+<p class="code-line" data-line="686">所有同一个类对象的公共数据→在类里只需要存在一遍的数据→静态成员！</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="687"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+  <span class="hljs-type">const</span> <span class="hljs-type">static</span> <span class="hljs-type">int</span> CONSTANT_FOR_THE_CLASS = <span class="hljs-number">100</span>;
+};
+</code></pre>
+<p class="code-line" data-line="692"><code>const static</code> 变量可以在类内初始化。它其实是implicitly <code>inline</code> 的，不需要加 <code>inline</code> 限定词。</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="694"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="41">
+<h2 class="code-line" data-line="696"><code>static</code> 成员函数</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="697"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span></span>;
+};
+</code></pre>
+<p class="code-line" data-line="703">理解了静态成员变量后，静态成员函数就好理解了：</p>
+<ul class="code-line" data-line="704">
+<li class="code-line" data-line="704">属于整个 <code>A</code> 类，而不属于哪一个特定对象</li>
+<li class="code-line" data-line="705">可以使用 <code>A::doSomething()</code> 在类外无需对象地调用</li>
+<li class="code-line" data-line="706">也可以对实际对象调用<strong>同一个</strong>函数 <code>a1.doSomething()</code>, <code>a2.doSomething()</code>。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="708"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="42">
+<h2 class="code-line" data-line="710"><code>static</code> 成员函数</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="711"><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-function"><span class="hljs-type">static</span> <span class="hljs-type">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span></span>;
+};
+</code></pre>
+<p class="code-line" data-line="717">额外的特性：</p>
+<ul class="code-line" data-line="718">
+<li class="code-line" data-line="718">由于它不属于某个特定对象，在函数内便不可用 <code>this</code>。</li>
+<li class="code-line" data-line="719">同样，它不可以访问任何属于对象而不是 <code>A</code> 类整体的成员。也就是说，它不能访问非 <code>static</code> 的成员。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="720"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="43">
+<h2 class="code-line" data-line="722"><code>static</code> 有什么用呢？</h2>
+<p class="code-line" data-line="724">假如你在开发访问手机摄像头、麦克风的接口。腾讯会议、微信视频、微软Skype纷纷找上你，希望用你的代码实现视频通话。<br />
+如果允许它们各自创建自己的对象来管理摄像头、麦克风，它们将无法知道有没有被其它软件占用、是否已经在录制状态……</p>
+<ul class="code-line" data-line="726">
+<li class="code-line" data-line="726">核心问题：你的手机里的硬件只有一份，无法被复制，不能像在代码里一样随手创建新的对象。</li>
+<li class="code-line" data-line="727">需要它们被仅一个对象来管理。</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="729"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="44">
+<h2 class="code-line" data-line="731">Singleton （单例）设计模式</h2>
+<p class="code-line" data-line="733">一种设计模式：</p>
+<ul class="code-line" data-line="734">
+<li class="code-line" data-line="734">只允许该类的对象被创建一次。
+<ul class="code-line" data-line="735">
+<li class="code-line" data-line="735">我们需要禁止它随意被创建！</li>
+</ul>
+</li>
+<li class="code-line" data-line="736">需要访问这个对象时，访问的都是同一个。
+<ul class="code-line" data-line="737">
+<li class="code-line" data-line="737">我们需要让它变成一个 <code>static</code> 变量！</li>
+</ul>
+</li>
+</ul>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="740"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="45">
+<h2 class="code-line" data-line="742">Meyers' Singleton</h2>
+<p class="code-line" data-line="744">Scott Meyers （Effective C++ 的作者 ） 提出了 C++ 中最简洁、完善的实现方式 Meyers' Singleton:</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="code-line language-cpp" data-line="746"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> {
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-built_in">Singleton</span>(<span class="hljs-type">const</span> Singleton&amp;) = <span class="hljs-keyword">delete</span>;
+  Singleton&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-type">const</span> Singleton&amp;) = <span class="hljs-keyword">delete</span>;
+  <span class="hljs-function"><span class="hljs-type">static</span> Singleton&amp; <span class="hljs-title">instance</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-type">static</span> Singleton inst;
+    <span class="hljs-keyword">return</span> inst;
+  }
+  <span class="hljs-comment">// other members...</span>
+<span class="hljs-keyword">private</span>:
+  <span class="hljs-built_in">Singleton</span>() {}
+  ~<span class="hljs-built_in">Singleton</span>() {}
+  <span class="hljs-comment">// other members...</span>
+};
+</code></pre>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="763"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="46">
+<h2 class="code-line" data-line="764">Meyers' Singleton</h2>
+<p class="code-line" data-line="766">显式将 copy constructor 和 copy assignment operator 定义为了 <code>delete</code>，即不可拷贝<br />
+将默认构造函数定义为 <code>private</code>，使得它无法被在类外随意创建。</p>
+<p class="code-line" data-line="769"><code>instance()</code> 是一个 <code>static</code> 成员函数，这意味着没有该类的具体对象时也可以调用它。当它被调用时，会发生的事情是：</p>
+<ul class="code-line" data-line="770">
+<li class="code-line" data-line="770">在第一次访问时，静态对象 <code>inst</code> 被第一次创建并初始化；之后的访问中它是同一个对象，可以保留这个对象的状态（比如其他成员变量的值）。</li>
+<li class="code-line" data-line="771">返回这个“仅一个的对象”的引用。</li>
+</ul>
+<p class="code-line" data-line="773">当你为它定义其他的成员时，便可以使用 <code>Singleton::instance().doSomething()</code>：先获得这个单例对象，再调用成员。</p>
+</section>
+</foreignObject></svg></div><div data-marp-vscode-slide-wrapper="" class="code-line" data-line="776"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720">
+<section id="47">
+<h1 class="code-line" data-line="780">初识类型推导：<code>auto</code> 和 <code>decltype</code></h1>
+</section>
+</foreignObject></svg></div></div>
+        
+        <script async type="text/javascript">
+/* From extension marp-team.marp-vscode */
+(()=>{var Y=Object.defineProperty;var d=($,E)=>Y($,"name",{value:E,configurable:!0});(()=>{var $={676:(w,b,g)=>{w.exports=g(185)},185:(w,b)=>{"use strict";var g;g={value:!0};const x={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},k="data-marp-auto-scaling-wrapper",u="data-marp-auto-scaling-svg",c="data-marp-auto-scaling-container";class r extends HTMLElement{constructor(){super(),this.svgPreserveAspectRatio="xMinYMid meet";const s=d(i=>([n])=>{const{width:e,height:t}=n.contentRect;this[i]={width:e,height:t},this.updateSVGRect()},"t");this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(s("containerSize")),this.wrapperObserver=new ResizeObserver((...i)=>{s("wrapperSize")(...i),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){var s,i,n,e,t;this.shadowRoot.innerHTML=`
+<style>
+  svg[${u}] { display: block; width: 100%; height: auto; vertical-align: top; }
+  span[${c}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }
+</style>
+<div ${k}>
+  <svg part="svg" ${u}>
+    <foreignObject><span ${c}><slot></slot></span></foreignObject>
+  </svg>
+</div>
+    `.split(/\n\s*/).join(""),this.wrapper=(s=this.shadowRoot.querySelector(`div[${k}]`))!==null&&s!==void 0?s:void 0;const o=this.svg;this.svg=(n=(i=this.wrapper)===null||i===void 0?void 0:i.querySelector(`svg[${u}]`))!==null&&n!==void 0?n:void 0,this.svg!==o&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=(t=(e=this.svg)===null||e===void 0?void 0:e.querySelector(`span[${c}]`))!==null&&t!==void 0?t:void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:s}=this;s&&(s.style.display="inline",requestAnimationFrame(()=>{s.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(s){const i=d(()=>{const n=(()=>{const e=s.getPropertyValue("--preserve-aspect-ratio");return e?e.trim():`x${(({textAlign:t,direction:o})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if(t==="start"||t==="end"){let a=o==="rtl";return t==="end"&&(a=!a),a?"Max":"Min"}return"Mid"})(s)}YMid meet`})();n!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=n,this.updateSVGRect()),s===this.svgComputedStyle&&requestAnimationFrame(i)},"e");i()}updateSVGRect(){var s,i,n,e,t,o,a;let p=Math.ceil((i=(s=this.containerSize)===null||s===void 0?void 0:s.width)!==null&&i!==void 0?i:0);const h=Math.ceil((e=(n=this.containerSize)===null||n===void 0?void 0:n.height)!==null&&e!==void 0?e:0);this.dataset.downscaleOnly!==void 0&&(p=Math.max(p,(o=(t=this.wrapperSize)===null||t===void 0?void 0:t.width)!==null&&o!==void 0?o:0));const f=(a=this.svg)===null||a===void 0?void 0:a.querySelector(":scope > foreignObject");if(f?.setAttribute("width",`${p}`),f?.setAttribute("height",`${h}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${p} ${h}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=p<=0||h<=0?"0":""),this.container){const _=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=_.startsWith("xmid")||_.startsWith("xmax")?"auto":"0",this.container.style.marginRight=_.startsWith("xmi")?"auto":"0"}}}d(r,"s");const m=d((l,{attrs:s={},style:i})=>class extends l{constructor(...n){super(...n);for(const[e,t]of Object.entries(s))this.hasAttribute(e)||this.setAttribute(e,t);this.attachShadow({mode:"open"})}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_update(){const n=i?`<style>:host { ${i} }</style>`:"";let e="<slot></slot>";const{autoScaling:t}=this.dataset;t!==void 0&&(e=`<marp-auto-scaling exportparts="svg:auto-scaling" ${t==="downscale-only"?"data-downscale-only":""}>${e}</marp-auto-scaling>`),this.shadowRoot.innerHTML=n+e}},"o");let v;const V=Symbol();let C;const j="marpitSVGPolyfill:setZoomFactor,",A=Symbol(),z=Symbol(),N=d(()=>{const l=navigator.vendor==="Apple Computer, Inc.",s=l?[D]:[],i={then:n=>(l?(async()=>{if(C===void 0){const e=document.createElement("canvas");e.width=10,e.height=10;const t=e.getContext("2d"),o=new Image(10,10),a=new Promise(p=>{o.addEventListener("load",()=>p())});o.crossOrigin="anonymous",o.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await a,t.drawImage(o,0,0),C=t.getImageData(5,5,1,1).data[3]<128}return C})().then(e=>{n?.(e?[D]:[])}):n?.([]),i)};return Object.assign(s,i)},"h");let H,O;function D(l){const s=typeof l=="object"&&l.target||document,i=typeof l=="object"?l.zoom:l;window[z]||(Object.defineProperty(window,z,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:e,origin:t})=>{if(t===window.origin)try{if(e&&typeof e=="string"&&e.startsWith(j)){const[,o]=e.split(","),a=Number.parseFloat(o);Number.isNaN(a)||(O=a)}}catch(o){console.error(o)}}));let n=!1;Array.from(s.querySelectorAll("svg[data-marpit-svg]"),e=>{var t,o,a,p;e.style.transform||(e.style.transform="translateZ(0)");const h=i||O||e.currentScale||1;H!==h&&(H=h,n=h);const f=e.getBoundingClientRect(),{length:_}=e.children;for(let T=0;T<_;T+=1){const S=e.children[T];if(S.getScreenCTM){const y=S.getScreenCTM();if(y){const G=(o=(t=S.x)===null||t===void 0?void 0:t.baseVal.value)!==null&&o!==void 0?o:0,I=(p=(a=S.y)===null||a===void 0?void 0:a.baseVal.value)!==null&&p!==void 0?p:0,Z=S.children.length;for(let F=0;F<Z;F+=1){const P=S.children[F];if(P.tagName==="SECTION"){const{style:R}=P;R.transformOrigin||(R.transformOrigin=`${-G}px ${-I}px`),R.transform=`scale(${h}) matrix(${y.a}, ${y.b}, ${y.c}, ${y.d}, ${y.e-f.left}, ${y.f-f.top}) translateZ(0.0001px)`;break}}}}}}),n!==!1&&Array.from(s.querySelectorAll("iframe"),({contentWindow:e})=>{e?.postMessage(`${j}${n}`,window.origin==="null"?"*":window.origin)})}d(D,"u");function B({once:l=!1,target:s=document}={}){const i=function(n=document){if(n[A])return n[A];let e=!0;const t=d(()=>{e=!1,delete n[A]},"i");Object.defineProperty(n,A,{configurable:!0,value:t});let o=[],a=!1;(async()=>{try{o=await N()}finally{a=!0}})();const p=d(()=>{for(const h of o)h({target:n});a&&o.length===0||e&&window.requestAnimationFrame(p)},"o");return p(),t}(s);return l?(i(),()=>{}):i}d(B,"v"),H=1,O=void 0;const W=B,M=Symbol(),L=d((l=document)=>{if(typeof window>"u")throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const t=window[V];t||customElements.define("marp-auto-scaling",r);for(const o of Object.keys(x)){const a=`marp-${o}`,p=x[o].proto();v!=null||(v=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is")),v&&p!==HTMLElement?t||customElements.define(a,m(p,{style:x[o].style}),{extends:o}):(t||customElements.define(a,m(HTMLElement,x[o])),e.querySelectorAll(`${o}[is="${a}"]`).forEach(h=>{h.outerHTML=h.outerHTML.replace(new RegExp(`^<${o}`,"i"),`<${a}`).replace(new RegExp(`</${o}>$`,"i"),`</${a}>`)}))}window[V]=!0})(l),l[M])return l[M];const s=B({target:l}),i=d(()=>{s(),delete l[M]},"n"),n=Object.assign(i,{cleanup:i,update:()=>L(l)});return Object.defineProperty(l,M,{configurable:!0,value:n}),n},"y");b.browser=L,g=L,g=W}},E={};function q(w){var b=E[w];if(b!==void 0)return b.exports;var g=E[w]={exports:{}};return $[w](g,g.exports,q),g.exports}d(q,"__webpack_require__");var U={};(()=>{"use strict";var w=q(676);function b(){let u,c;const r=d(()=>{const m=document.getElementById("__marp-vscode"),v=!!m;u!==v?(document.body.classList.toggle("marp-vscode",v),v?c=(0,w.browser)():(c?.cleanup(),c=void 0),u=v):v&&c?.update(),u?(m&&g(m),x()):k()},"updateCallback");window.addEventListener("load",()=>window.setTimeout(r,100)),window.addEventListener("vscode.markdown.updateContent",r),r()}d(b,"preview");const g=d(u=>{u.querySelectorAll("[is]").forEach(c=>{if(c.nodeName.includes("-")||document.createElement(c.nodeName).constructor!==c.constructor)return;const{outerHTML:m}=c;c.outerHTML=m,console.debug("[marp-vscode] Custom element has been upgraded forcibly:",m.slice(0,m.indexOf(">")+1||void 0))})},"forceUpgradeCustomElements"),x=d(()=>{const u=document.querySelectorAll("style:not(#__marp-vscode-style):not(#_defaultStyles):not([data-marp-vscode-body])"),c=document.querySelectorAll('link[rel="stylesheet"][href]:not([href*="marp-vscode"])');u.forEach(r=>{r.closest("#__marp-vscode")||(r.dataset.marpVscodeBody=r.textContent??"",r.textContent="")}),c.forEach(r=>{if(r.closest("#__marp-vscode"))return;const{href:m}=r;r.dataset.marpVscodeHref=m,r.removeAttribute("href")})},"removeStyles"),k=d(()=>{const u=document.querySelectorAll("style[data-marp-vscode-body]"),c=document.querySelectorAll("link[data-marp-vscode-href]");u.forEach(r=>{r.textContent=r.dataset.marpVscodeBody||"",delete r.dataset.marpVscodeBody}),c.forEach(r=>{r.href=r.dataset.marpVscodeHref||"",delete r.dataset.marpVscodeHref})},"restoreStyles");b()})()})();})();
+
+</script>
+
+    </body>
+    </html>
